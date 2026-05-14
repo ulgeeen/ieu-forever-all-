@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEU DataViz Archive — Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="shared-header.css">
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: #F4EEDB;
+            overflow: hidden;
+        }
+
+        .master-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Projenin görüneceği alan */
+        #project-frame {
+            border: none;
+            width: 100%;
+            flex-grow: 1;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="master-wrapper">
+        <header class="main-header">
+            <h1 id="v-title">ACADEMIC STAFF NUMBERS</h1>
+            <h2 id="v-years">2001<br>2025</h2>
+        </header>
+
+        <div class="panel-container">
+            <div class="panel panel-wide">
+                <span class="panel-label">DESCRIPTION</span>
+                <p id="v-desc">-</p>
+            </div>
+            <div class="panel">
+                <span class="panel-label">SOURCE</span>
+                <a href="#" id="v-source" target="_blank">View Data</a>
+            </div>
+            <div class="panel">
+                <span class="panel-label">TOOLS</span>
+                <p id="v-tools">-</p>
+            </div>
+            <div class="panel">
+                <span class="panel-label">STUDENT</span>
+                <p id="v-student">-</p>
+            </div>
+            <div class="panel action-panel">
+                <div class="lang-switch" onclick="toggleLanguage()">TR / EN</div>
+                <a href="index.html" id="home-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" />
+                    </svg>
+                    <span id="v-back-text">BACK</span>
+                </a>
+            </div>
+        </div>
+
+        <iframe id="project-frame" src=""></iframe>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const folder = params.get('p') || 'oguz';
+        const lang = params.get('lang') || 'en';
+
+        // BURAYA YENİ ÖĞRENCİLERİ EKLEYEBİLİRSİN
+        const projectsData = {
+            oguz: {
+                en: { title: "ACADEMIC STAFF NUMBER OF <br> IZMIR UNIVERSITY OF ECONOMICS", years: "2001<br>2025", desc: "This chart visualizes the total number of academic staff at Izmir University of Economics from its establishment in 2001 to 2026, showing the overall growth trend of the faculty.", student: "Oğuz Ülgen Tunç", tools: "HTML, CSS, JavaScript, d3.js, Adobe Illustrator", back: "BACK", src: "oguz/index.html" },
+                tr: { title: "AKADEMİK PERSONEL <br> SAYILARI", years: "2001<br>2025", desc: "İEÜ personel artışını gösteren sarmal grafik.", student: "Oğuz Ülgen Tunç", tools: "D3.js, AI", back: "GERİ", src: "oguz/turkce/indexTurkce.html" }
+            },
+            utku: {
+                en: { title: "ACADEMIC <br> LEVELS", years: "2001<br>2025", desc: "Infographic of academic ranks over years.", student: "Utku [Soyadı]", tools: "D3.js, HTML", back: "BACK", src: "utku/index.html" },
+                tr: { title: "AKADEMİK <br> SEVİYELER", years: "2001<br>2025", desc: "Yıllara göre akademik seviye dağılımı.", student: "Utku [Soyadı]", tools: "D3.js, HTML", back: "GERİ", src: "utku/index.html" }
+            }
+        };
+
+        function updateUI() {
+            const data = projectsData[folder][lang];
+            document.getElementById('v-title').innerHTML = data.title;
+            document.getElementById('v-years').innerHTML = data.years;
+            document.getElementById('v-desc').textContent = data.desc;
+            document.getElementById('v-student').textContent = data.student;
+            document.getElementById('v-tools').textContent = data.tools;
+            document.getElementById('v-back-text').textContent = data.back;
+            document.getElementById('project-frame').src = data.src;
+        }
+
+        function toggleLanguage() {
+            const newLang = lang === 'en' ? 'tr' : 'en';
+            window.location.search = `?p=${folder}&lang=${newLang}`;
+        }
+
+        updateUI();
+    </script>
+</body>
+
+</html>

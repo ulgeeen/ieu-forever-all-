@@ -1,0 +1,127 @@
+/* shared-header.css */
+:root {
+    --header-color: #A4185C;
+    /* Bordo renk */
+    --bg: #F4EEDB;
+    /* Krem arka plan */
+    --ink: #1a1714;
+    --ff: 'Source Sans 3', sans-serif;
+    --ff-headers: 'Jost', sans-serif;
+}
+
+/* ── HEADER (Jost kalacaklar) ── */
+.main-header {
+    border-bottom: 2px solid var(--header-color);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.main-header h1 {
+    font-family: var(--ff-headers);
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--header-color);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+}
+
+.main-header h2 {
+    font-family: var(--ff-headers);
+    font-weight: 200;
+    font-size: 32px;
+    color: var(--header-color);
+    text-align: right;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+}
+
+/* ── PANELLER (Source Sans 3 olacaklar) ── */
+.panel-container {
+    display: grid;
+    /* Sırasıyla: Açıklama, Kaynak, Araçlar, Öğrenci, Butonlar */
+    grid-template-columns: 10fr 3fr 3fr 3fr 4fr;
+    border-bottom: 2px solid var(--header-color);
+}
+
+.panel {
+    border-right: 2px solid var(--header-color);
+    height: 80px;
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; <-- BU SATIRI DEĞİŞTİRİYORUZ */
+    justify-content: space-between;
+    /* Başlığı tepeye, içeriği alta iter */
+    align-items: flex-start;
+}
+
+.panel:last-child {
+    border-right: none;
+}
+
+/* YENİ HALİ (Grid column satırı silindi) */
+.panel-wide {
+    justify-content: space-between;
+}
+
+.panel-label {
+    font-family: var(--ff);
+    /* Source Sans 3 uygulandı */
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--header-color);
+    text-transform: uppercase;
+}
+
+.panel p,
+.panel a {
+    font-family: var(--ff);
+    /* Source Sans 3 uygulandı */
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ── AKSİYON PANELİ BUTONLARI (Source Sans 3) ── */
+.action-panel {
+    padding: 0;
+}
+
+.lang-switch,
+#home-btn {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--ff);
+    /* Source Sans 3 uygulandı */
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--header-color);
+    transition: 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+}
+
+.lang-switch {
+    border-bottom: 2px solid var(--header-color);
+}
+
+.lang-switch:hover,
+#home-btn:hover {
+    background: var(--header-color);
+    color: var(--bg);
+}

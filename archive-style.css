@@ -1,0 +1,108 @@
+/* ── RESET ── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1a1714;
+    /* Karanlık, şık bir arka plan */
+    font-family: 'Source Sans 3', sans-serif;
+    overflow-x: hidden;
+}
+
+/* ── 2 SÜTUNLU BOŞLUKSUZ GRID (MASONRY) ── */
+.archive-grid {
+    /* Sayfayı tam 2 eşit sütuna böler */
+    column-count: 2;
+    /* Sütunlar arası boşluğu sıfırlar */
+    column-gap: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    /* Satır aralarında oluşabilecek font-size kaynaklı piksel boşluklarını yutar */
+    font-size: 0;
+}
+
+/* ── PROJE KUTULARI (THUMBNAIL) ── */
+.project-item {
+    position: relative;
+    display: block;
+    width: 100%;
+    break-inside: avoid;
+    /* Resmin yarısının diğer sütuna kaymasını engeller */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Tüm resimlerin genişliği tam sütuna oturacak (aynı), yüksekliği orijinal kalacak (farklı) */
+.project-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+/* ── HOVER EFEKTİ VE YAZILAR ── */
+/* Başlangıçta yazılar görünmez */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 23, 20, 0.85);
+    /* Üzerine gelince beliren koyu transparan perde */
+    color: #F4EEDB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.overlay h2 {
+    font-family: 'Jost', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    transform: translateY(15px);
+    transition: transform 0.4s ease;
+}
+
+.overlay p {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    font-style: italic;
+    transform: translateY(15px);
+    transition: transform 0.4s ease;
+}
+
+/* Üzerine gelindiğinde (Hover) */
+.project-item:hover img {
+    transform: scale(1.03);
+    /* Resim çok hafif büyür */
+}
+
+.project-item:hover .overlay {
+    opacity: 1;
+    /* Yazılar ve koyu perde belirir */
+}
+
+.project-item:hover .overlay h2,
+.project-item:hover .overlay p {
+    transform: translateY(0);
+    /* Yazılar zarifçe yukarı doğru kayarak yerine oturur */
+}
+
+/* Mobil ekranlar için tek sütuna düşürme (isteğe bağlı ama UX için iyidir) */
+@media (max-width: 768px) {
+    .archive-grid {
+        column-count: 1;
+    }
+}
